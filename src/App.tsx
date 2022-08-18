@@ -1,11 +1,23 @@
 import { Cliente } from './Components/Cliente';
 import styled, { css } from 'styled-components'
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { ClienteCompras } from './Components/ClienteCompras';
+import { Menu } from './Components/Menu';
+
 
 function App() {
   return (
     <Container>
       <Titulo>Controle de Vendas - Nelzeli Felicio</Titulo>
-      <Cliente/>
+
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Menu />}>
+            <Route index element={<ClienteCompras />} />
+            <Route path="clientes" element={<Cliente />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </Container>
   );
 }
