@@ -5,16 +5,6 @@ import { Cliente } from "../Models/Cliente";
 
 export const ClienteCadastro = () => {
 
-    // const [tiposCliente, setaTipoCliente] = useState<any>([]);
-
-    // useEffect(() => {
-    //      axios.get('https://localhost:7299/Cliente')
-    //         .then(response => {
-    //             setaTipoCliente([...tiposCliente, ...response.data])
-    //             console.log('chamou tipos clientes 1 vez com sucesso');
-    //         })
-    // }, [])
-
     const [cliente, setCliente] = useState<Cliente>({
         nome: '',
         sobrenome: '',
@@ -22,15 +12,11 @@ export const ClienteCadastro = () => {
     });
 
     const salvarCliente = () => {
-        const headers = {
-            'Authorization': 'Bearer my-token',
-            'My-Custom-Header': 'foobar'
-        };
-        axios.post('https://localhost:7299/Cliente', cliente, { headers })
-            .then(response => console.log(response));
-
-
-        console.log(cliente)
+        axios.post('https://localhost:7299/Cliente', cliente)
+            .then(response => {
+                console.log(response)
+                resetarForm();
+            });
     }
 
     const handleEvent = (event: any) => {
@@ -49,13 +35,13 @@ export const ClienteCadastro = () => {
         <SelectInput>
             <option>Caminoneiro</option>
             <option>Escritorio</option>
+            <option>Outros</option>
         </SelectInput>
         <div>
             <BotaoSalvar onClick={salvarCliente}>Salvar</BotaoSalvar>
         </div>
     </Form>
 }
-
 
 const Form = styled.div`
   border-radius: 5px;
@@ -92,4 +78,8 @@ const BotaoSalvar = styled.button`
   box-sizing: border-box;
   background-color: #4CAF50;
   color:white;
+  cursor:pointer;
+  &:hover {
+    background-color:green;
+  }
 `

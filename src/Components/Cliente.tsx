@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import { ClienteCadastro } from "./ClienteCadastro";
 
 export const Cliente = () => {
@@ -16,13 +17,13 @@ export const Cliente = () => {
     }, [])
 
     return <div>
-        <ClienteCadastro/>
-        <select>
+        <ClienteCadastro />
+        {/* <select>
             <option>Caminhoneiro</option>
             <option>Escritorio</option>
-        </select>
+        </select> */}
         <h3>Dividas em aberto referente ao mes de Junho do ano 2022</h3>
-        <ul>
+        <Ul>
             {
                 clientes?.map((x: any) => {
                     return <>
@@ -37,6 +38,12 @@ export const Cliente = () => {
                     </>
                 })
             }
-        </ul>
+        </Ul>
     </div>
 }
+
+
+const Ul = styled.ul`
+
+`
+
