@@ -5,42 +5,44 @@ import { Cliente } from "../Models/Cliente";
 
 export const ClienteCadastro = () => {
 
-    const [cliente, setCliente] = useState<Cliente>({
-        nome: '',
-        sobrenome: '',
-        tipoClienteId: 1
-    });
+  const [cliente, setCliente] = useState<Cliente>({
+    id: 0,
+    nome: '',
+    sobrenome: '',
+    tipoClienteId: 1
+  });
 
-    const salvarCliente = () => {
-        axios.post('https://localhost:7299/Cliente', cliente)
-            .then(response => {
-                console.log(response)
-                resetarForm();
-            });
-    }
+  const salvarCliente = () => {
+    axios.post('https://localhost:7299/Cliente', cliente)
+      .then(response => {
+        console.log(response)
+        resetarForm();
+      });
+  }
 
-    const handleEvent = (event: any) => {
-        setCliente({ ...cliente, [event.target.name]: event.target.value })
-    }
+  const handleEvent = (event: any) => {
+    setCliente({ ...cliente, [event.target.name]: event.target.value })
+  }
 
-    const resetarForm = () => setCliente({
-        nome: '',
-        sobrenome: '',
-        tipoClienteId: 0
-    });
+  const resetarForm = () => setCliente({
+    id: 0,
+    nome: '',
+    sobrenome: '',
+    tipoClienteId: 0
+  });
 
-    return <Form>
-        <Input placeholder="Nome" name="nome" onChange={handleEvent} value={cliente?.nome} />
-        <Input placeholder="Sobrenome" name="sobrenome" onChange={handleEvent} value={cliente?.sobrenome} />
-        <SelectInput>
-            <option>Caminoneiro</option>
-            <option>Escritorio</option>
-            <option>Outros</option>
-        </SelectInput>
-        <div>
-            <BotaoSalvar onClick={salvarCliente}>Salvar</BotaoSalvar>
-        </div>
-    </Form>
+  return <Form>
+    <Input placeholder="Nome" name="nome" onChange={handleEvent} value={cliente?.nome} />
+    <Input placeholder="Sobrenome" name="sobrenome" onChange={handleEvent} value={cliente?.sobrenome} />
+    <SelectInput>
+      <option>Caminoneiro</option>
+      <option>Escritorio</option>
+      <option>Outros</option>
+    </SelectInput>
+    <div>
+      <BotaoSalvar onClick={salvarCliente}>Salvar</BotaoSalvar>
+    </div>
+  </Form>
 }
 
 const Form = styled.div`

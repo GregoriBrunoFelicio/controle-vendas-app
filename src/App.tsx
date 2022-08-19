@@ -9,7 +9,6 @@ function App() {
   return (
     <Container>
       <Titulo>Controle de Vendas - Nelzeli Felicio</Titulo>
-
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Menu />}>
