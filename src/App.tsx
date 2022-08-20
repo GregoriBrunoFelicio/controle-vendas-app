@@ -3,12 +3,14 @@ import styled, { css } from 'styled-components'
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { ClienteCompras } from './Components/ClienteCompras';
 import { Menu } from './Components/Menu';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function App() {
   return (
-    <Container>
-      <Titulo>Controle de Vendas - Nelzeli Felicio</Titulo>
+    <div className='col-12 m-2'>
+      <h4>Controle de Vendas - Nelzeli Felicio</h4>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Menu />}>
@@ -17,17 +19,8 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </Container>
+    </div>
   );
 }
 
 export default App;
-
-const Container = styled.div`
-  margin:10px auto 10px 10px;
-  max-width:1920px;
-`
-
-const Titulo = styled.h2`
-  
-`

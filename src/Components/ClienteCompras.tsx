@@ -16,26 +16,22 @@ export const ClienteCompras = () => {
 
     return <>
         <h3>Dividas em aberto referente ao mes de Junho do ano 2022</h3>
-        <Ul>
+        <ul className="list-group">
             {
                 clientes?.map((x: any) => {
                     return <>
-                        <li>NOME: {x.nome} - DIVIDA TOTAL: {x.totalDivida}</li>
+                        <li className="list-group-item">NOME: {x.nome} - DIVIDA TOTAL: {x.totalDivida}</li>
 
-                        <ul>
+                        <ul className="list-group">
                             <span>Compras Feitas</span>
                             {x.compras.map((c: any) => {
-                                return <li>{c.produto.nome} -{c.produto.preco} </li>
+                                return <li className="list-group-item">{c.produto.nome} -{c.produto.preco} </li>
                             })}
                         </ul>
                     </>
                 })
             }
-        </Ul>
+        </ul>
     </>
+    
 }
-
-const Ul = styled.ul`
-
-`
-
