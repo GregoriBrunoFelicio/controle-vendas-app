@@ -9,7 +9,9 @@ export const ClienteCadastro = () => {
     id: 0,
     nome: '',
     sobrenome: '',
-    tipoClienteId: 1
+    tipoClienteId: 1,
+    compras: [],
+    totalDivida: 0
   });
 
   const salvarCliente = () => {
@@ -28,7 +30,9 @@ export const ClienteCadastro = () => {
     id: 0,
     nome: '',
     sobrenome: '',
-    tipoClienteId: 0
+    tipoClienteId: 0,
+    compras: [],
+    totalDivida: 0
   });
 
   return <form>

@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { ClienteCompras } from './Components/ClienteCompras';
 import { Menu } from './Components/Menu';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Produto } from './Components/Produto';
 
 
 
@@ -16,6 +17,7 @@ function App() {
           <Route path='/' element={<Menu />}>
             <Route index element={<ClienteCompras />} />
             <Route path="clientes" element={<Cliente />} />
+            <Route path="produtos" element={<Produto />} />
           </Route>
         </Routes>
       </BrowserRouter>

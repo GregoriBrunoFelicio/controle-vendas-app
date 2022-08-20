@@ -7,6 +7,7 @@ export const Menu = () => {
             <div className="m-1">
                 <Link className="navbar-brand" to="/">Compras</Link>
                 <Link className="navbar-brand" to="/clientes">Clientes</Link>
+                <Link className="navbar-brand" to="/produtos">Produto</Link>
             </div>
         </div>
         <Outlet />
