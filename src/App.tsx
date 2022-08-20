@@ -1,5 +1,4 @@
-import { Cliente } from './Components/Cliente';
-import styled, { css } from 'styled-components'
+import { Clientes } from './Components/Clientes';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { ClienteCompras } from './Components/ClienteCompras';
 import { Menu } from './Components/Menu';
@@ -16,7 +15,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Menu />}>
             <Route index element={<ClienteCompras />} />
-            <Route path="clientes" element={<Cliente />} />
+            <Route path="clientes" element={<Clientes />} />
             <Route path="produtos" element={<Produto />} />
           </Route>
         </Routes>

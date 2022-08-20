@@ -9,7 +9,7 @@ export const ClienteCompras = () => {
     const [clientes, setClientes] = useState<any>([]);
 
     useEffect(() => {
-        axios.get('https://localhost:7299/Cliente')
+        axios.get('https://localhost:7299/Cliente/ComCompras')
             .then(response => {
                 setClientes([...clientes, ...response.data])
                 console.log('chamou clientes 1 vez com sucesso');
@@ -38,7 +38,7 @@ export const ClienteCompras = () => {
                                     <tbody>
                                         {cliente.compras.map(compra => {
                                             return <>
-                                                <tr>
+                                                <tr tabIndex={index}>
                                                     <td>{compra.produto.nome}</td>
                                                     <td>R$ {compra.produto.preco}</td>
                                                     <td> 10/10/2022</td>

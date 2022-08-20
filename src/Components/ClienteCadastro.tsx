@@ -17,6 +17,7 @@ export const ClienteCadastro = () => {
   const salvarCliente = () => {
     axios.post('https://localhost:7299/Cliente', cliente)
       .then(response => {
+        console.log(cliente);
         console.log(response)
         resetarForm();
       });
@@ -35,7 +36,7 @@ export const ClienteCadastro = () => {
     totalDivida: 0
   });
 
-  return <form>
+  return <>
     <div className="form-group col-12">
       <div className="col-6 mb-2">
         <input className="form-control" placeholder="Nome" name="nome" onChange={handleEvent} value={cliente?.nome} />
@@ -54,5 +55,5 @@ export const ClienteCadastro = () => {
         <button className="btn btn-lg btn-primary" onClick={salvarCliente}>Salvar</button>
       </div>
     </div >
-  </form>
+  </>
 }
