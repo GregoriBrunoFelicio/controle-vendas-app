@@ -10,7 +10,7 @@ import { Produto } from './Components/Produto';
 function App() {
   return (
     <div className='col-12 m-2'>
-      <h4>Controle de Vendas - Nelzeli Felicio</h4>
+      <h4>Controle de Vendas</h4>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Menu />}>

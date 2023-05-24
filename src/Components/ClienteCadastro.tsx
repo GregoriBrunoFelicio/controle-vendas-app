@@ -2,23 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import styled from "styled-components";
 import { Cliente } from "../Models/Cliente";
+import { TipoClienteSelect } from "./TipoCliente";
 
 export const ClienteCadastro = () => {
 
-  const [cliente, setCliente] = useState<Cliente>({
-    id: 0,
-    nome: '',
-    sobrenome: '',
-    tipoClienteId: 1,
-    compras: [],
-    totalDivida: 0
-  });
+  const [cliente, setCliente] = useState<Cliente>({} as Cliente);
 
   const salvarCliente = () => {
     axios.post('https://localhost:7299/Cliente', cliente)
-      .then(response => {
-        console.log(cliente);
-        console.log(response)
+      .then((response: any) => {
         resetarForm();
       });
   }
@@ -36,6 +28,10 @@ export const ClienteCadastro = () => {
     totalDivida: 0
   });
 
+  const selecionaTipoCliente = (tipoClienteId: number) => {
+    console.log(tipoClienteId)
+  }
+
   return <>
     <div className="form-group col-12">
       <div className="col-6 mb-2">
@@ -45,11 +41,7 @@ export const ClienteCadastro = () => {
         <input className="form-control" placeholder="Sobrenome" name="sobrenome" onChange={handleEvent} value={cliente?.sobrenome} />
       </div>
       <div className="col-3">
-        <select className="form-control">
-          <option>Caminoneiro</option>
-          <option>Escritorio</option>
-          <option>Outros</option>
-        </select>
+        <TipoClienteSelect selecionaTipoCliente={selecionaTipoCliente} />
       </div>
       <div className="mt-2">
         <button className="btn btn-lg btn-primary" onClick={salvarCliente}>Salvar</button>

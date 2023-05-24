@@ -12,7 +12,6 @@ export const Clientes = () => {
         axios.get('https://localhost:7299/Cliente')
             .then(response => {
                 setClientes([...clientes, ...response.data])
-                console.log('chamou clientes 1 vez com sucesso');
             })
 
     }, [])
