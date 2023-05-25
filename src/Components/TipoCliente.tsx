@@ -1,9 +1,8 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Clientes } from "./Clientes";
 import { Form } from "react-bootstrap";
-import { TipoCliente } from "../Models/tipoCliente";
+import { TipoCliente } from "../Models/TipoCliente";
 
 export const TipoClienteSelect = (props: any) => {
 
@@ -21,11 +20,11 @@ export const TipoClienteSelect = (props: any) => {
     }
 
     return <>
-        <Form.Select defaultChecked onChange={(e: any) => props.selecionaTipoCliente(e.currentTarget.value)}>
+        <Form.Select defaultChecked onChange={(e: any) => props.setTipoCliente(e.currentTarget.value)}>
             {
                 tiposCliente?.map((tipoCliente: TipoCliente) => {
                     return <>
-                        <option value={tipoCliente.id} >{tipoCliente.nome}</option>
+                        <option key={tipoCliente.id} value={tipoCliente.id} >{tipoCliente.nome}</option>
                     </>
                 })
             }

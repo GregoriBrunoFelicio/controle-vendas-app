@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { Cliente } from "../Models/Cliente";
 import { Compra } from "../Models/Compra";
 
-export const ClienteCompras = () => {
+export const Compras = () => {
     const [clientes, setClientes] = useState<any>([]);
 
     useEffect(() => {

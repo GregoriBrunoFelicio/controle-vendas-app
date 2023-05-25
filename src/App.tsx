@@ -1,11 +1,9 @@
-import { Clientes } from './Components/Clientes';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { ClienteCompras } from './Components/ClienteCompras';
 import { Menu } from './Components/Menu';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Produto } from './Components/Produto';
-
-
+import { ClienteCadastro } from "./Components/ClienteCadastro";
+import { Compras } from "./Components/Compras";
 
 function App() {
   return (
@@ -14,8 +12,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Menu />}>
-            <Route index element={<ClienteCompras />} />
-            <Route path="clientes" element={<Clientes />} />
+            <Route index element={<Compras />} />
+            <Route path="clientes" element={<ClienteCadastro />} />
             <Route path="produtos" element={<Produto />} />
           </Route>
         </Routes>
