@@ -10,7 +10,7 @@ export const ClienteLista = (props: any) => {
     useEffect(() => {
         axios.get('https://localhost:7299/Cliente')
             .then(response => {
-                setClientes([...clientes, ...response.data])
+                setClientes(response.data)
             })
 
     }, [props.loading])
@@ -22,7 +22,7 @@ export const ClienteLista = (props: any) => {
                     <ListGroupItem>
                         <div className="row">
                             <div className="col-10">
-                                {cliente.nome} {cliente.sobrenome}
+                                {cliente.nome} {cliente.sobrenome} - {cliente.tipoCliente.nome}
                             </div>
                             <div className="col-2">
                                 <Button variant="primary" onClick={() => props.fillForm(cliente)}>Editar</Button>

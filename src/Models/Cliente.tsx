@@ -1,4 +1,5 @@
 import { Compra } from "./Compra";
+import { TipoCliente } from "./TipoCliente";
 
 export interface Cliente {
     id: number;
@@ -7,4 +8,5 @@ export interface Cliente {
     tipoClienteId: number;
     totalDivida: number;
     compras: Compra[];
+    tipoCliente: TipoCliente;
 }

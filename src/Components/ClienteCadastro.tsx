@@ -1,28 +1,45 @@
-import axios from "axios";
+import axios from 'axios';
 import { useEffect, useState } from "react"
 import { Cliente } from "../Models/Cliente";
-import { TipoClienteSelect } from "./TipoCliente";
 import { ClienteLista } from "./ClienteLista";
-import { Loading } from "./Shared/Loading";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import { TipoCliente } from '../Models/TipoCliente';
+import { TipoClienteSelect } from './TipoClienteSelect';
 
 export const ClienteCadastro = () => {
-
-  const [cliente, setCliente] = useState<Cliente>({} as Cliente);
+  const [cliente, setCliente] = useState<Cliente>({ tipoClienteId: 0, nome: '', sobrenome: '' } as Cliente);
   const [loading, setLoading] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
 
   const save = () => {
+    if (isUpdate) {
+      update()
+    } else {
+      create()
+    }
+  }
+
+  const create = () => {
     setLoading(true)
     axios.post('https://localhost:7299/Cliente', cliente)
       .then(() => {
         setLoading(false);
         resetForm();
-      })
+      }).catch(() => setLoading(false))
+  }
+
+  const update = () => {
+    setLoading(true)
+    axios.put('https://localhost:7299/Cliente', cliente)
+      .then(() => {
+        setIsUpdate(false)
+        setLoading(false);
+        resetForm();
+      }).catch(() => setLoading(false))
   }
 
   const handleEvent = (event: any) => {
-    setCliente({ ...cliente, [event.target.name]: event.target.value })
+    setCliente({ ...cliente, [event.target.name]: event.target.value });
   }
 
   const resetForm = () => setCliente({
@@ -31,35 +48,48 @@ export const ClienteCadastro = () => {
     sobrenome: '',
     tipoClienteId: 0,
     compras: [],
-    totalDivida: 0
+    totalDivida: 0,
+    tipoCliente: {} as TipoCliente
   });
 
   const setTipoCliente = (tipoClienteId: number) => {
-    cliente.tipoClienteId = tipoClienteId;
+    setCliente({ ...cliente, tipoClienteId: tipoClienteId })
   }
 
   const fillForm = (cliente: Cliente) => {
-    console.log(cliente)
-    setCliente(cliente)
     setIsUpdate(true)
+    setCliente(cliente)
+  }
+
+  const isFormValid = () => {
+    if (cliente?.tipoClienteId === 0) {
+      return false;
+    }
+    if (!cliente.nome || !cliente.sobrenome) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   return <>
     <div className="form-group col-12">
-      <div className="col-6 mb-2">
-        <input className="form-control" placeholder="Nome" name="nome" onChange={handleEvent} value={cliente?.nome} />
-      </div>
-      <div className="col-6 mb-2">
-        <input className="form-control" placeholder="Sobrenome" name="sobrenome" onChange={handleEvent} value={cliente?.sobrenome} />
-      </div>
-      <div className="col-3">
-        <TipoClienteSelect setTipoCliente={setTipoCliente} />
-      </div>
-      <div className="col-6 mt-2">
-        <Button size="lg" onClick={save} disabled={loading}>Salvar</Button>
-      </div>
-      <ClienteLista loading={loading} fillForm={fillForm} />
+      <Form className='col-12'>
+        <Form.Group className='col-3 m-2'>
+          <Form.Control type='text' placeholder='Nome' name="nome" onChange={handleEvent} value={cliente?.nome} />
+        </Form.Group>
+        <Form.Group className='col-3 m-2'>
+          <Form.Control type='text' placeholder='Sobrenome' name="sobrenome" onChange={handleEvent} value={cliente?.sobrenome} />
+        </Form.Group>
+        <Form.Group className='col-3 m-2'>
+          <TipoClienteSelect setTipoCliente={setTipoCliente} loading={loading} />
+        </Form.Group>
+        <Form.Group className='col-3 m-2'>
+          <Button size="lg" onClick={save} disabled={loading || !isFormValid()}>Salvar</Button>
+        </Form.Group>
+        <ClienteLista loading={loading} fillForm={fillForm} />
+      </Form>
     </div >
-
   </>
 }
