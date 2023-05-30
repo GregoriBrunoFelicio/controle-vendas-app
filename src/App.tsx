@@ -6,7 +6,7 @@ import { ClienteCadastro } from "./Components/ClienteCadastro";
 import { Compras } from "./Components/Compras";
 
 function App() {
-  return (
+  return <>
     <div className='col-12 m-2'>
       <h4>Controle de Vendas</h4>
       <BrowserRouter>
@@ -19,7 +19,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-  );
+  </>
 }
 
 export default App;

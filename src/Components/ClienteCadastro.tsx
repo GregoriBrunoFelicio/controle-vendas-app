@@ -2,12 +2,12 @@ import axios from 'axios';
 import { useEffect, useState } from "react"
 import { Cliente } from "../Models/Cliente";
 import { ClienteLista } from "./ClienteLista";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { TipoCliente } from '../Models/TipoCliente';
 import { TipoClienteSelect } from './TipoClienteSelect';
 
 export const ClienteCadastro = () => {
-  const [cliente, setCliente] = useState<Cliente>({ tipoClienteId: 0, nome: '', sobrenome: '' } as Cliente);
+  const [cliente, setCliente] = useState<Cliente>({} as Cliente);
   const [loading, setLoading] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
 
@@ -71,6 +71,12 @@ export const ClienteCadastro = () => {
     else {
       return true;
     }
+  }
+
+  const showDeleteConfirmationModal = () => {
+    return <Modal>
+      <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+    </Modal>
   }
 
   return <>

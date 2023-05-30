@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { TipoCliente } from "../Models/TipoCliente";
 
@@ -21,12 +21,10 @@ export const TipoClienteSelect = (props: any) => {
 
     return <>
         <Form.Select onChange={e => props.setTipoCliente(Number(e.currentTarget.value))}>
-            <option value={0}>Tipo Cliente</option>
+            <option key={0} value={0}>Tipo Cliente</option>
             {
                 tiposCliente?.map((tipoCliente: TipoCliente) => {
-                    return <>
-                        <option key={tipoCliente.id} value={tipoCliente.id} >{tipoCliente.nome}</option>
-                    </>
+                    return <option key={tipoCliente.id} value={tipoCliente.id} >{tipoCliente.nome}</option>
                 })
             }
         </Form.Select>
