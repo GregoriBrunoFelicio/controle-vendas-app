@@ -1,8 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { TipoCliente } from "../Models/TipoCliente";
-import { ClienteService } from "../Services/ClienteService";
 import { TipoClienteService } from "../Services/TipoClienteService";
 
 export const TipoClienteSelect = (props: any) => {

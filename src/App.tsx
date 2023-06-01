@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Menu } from './Components/Menu';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 import { Produto } from './Components/Produto';
 import { ClienteCadastro } from "./Components/ClienteCadastro";
 import { Compras } from "./Components/Compras";
+import { ToastContainer } from "react-bootstrap";
 
 function App() {
   return <>

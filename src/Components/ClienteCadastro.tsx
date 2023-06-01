@@ -6,12 +6,15 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { TipoCliente } from '../Models/TipoCliente';
 import { TipoClienteSelect } from './TipoClienteSelect';
 import { ClienteService } from '../Services/ClienteService';
+import { toast, ToastContainer } from 'react-toastify';
+import { ToastService } from './Shared/ToastService';
 
 export const ClienteCadastro = () => {
   const [cliente, setCliente] = useState<Cliente>({} as Cliente);
   const [loading, setLoading] = useState(false);
   const [editando, setEditando] = useState(false);
   const clienteService = new ClienteService();
+  const toastService = new ToastService();
 
   const salvar = () => {
     if (editando) {
@@ -27,7 +30,12 @@ export const ClienteCadastro = () => {
       .then(() => {
         setLoading(false);
         limparFormulario();
-      }).catch(() => setLoading(false))
+        toastService.notificarSucesso('Cliente criado com sucesso');
+      }).catch(() => {
+        setLoading(false)
+        toastService.notificarFalha('Erro ao salvar cliente');
+      }
+      )
   }
 
   const editar = () => {
@@ -37,7 +45,11 @@ export const ClienteCadastro = () => {
         setEditando(false)
         setLoading(false);
         limparFormulario();
-      }).catch(() => setLoading(false))
+        toastService.notificarSucesso('Cliente editado com sucesso');
+      }).catch(() => {
+        setLoading(false)
+        toastService.notificarFalha('Erro ao editar cliente');
+      })
   }
 
   const handleEvent = (event: any) => {
@@ -75,8 +87,8 @@ export const ClienteCadastro = () => {
     }
   }
 
-
   return <>
+    <ToastContainer />
     <div className="form-group col-12">
       <Form className='col-12'>
         <Form.Group className='col-3 m-2'>
@@ -96,3 +108,5 @@ export const ClienteCadastro = () => {
     </div >
   </>
 }
+
+
