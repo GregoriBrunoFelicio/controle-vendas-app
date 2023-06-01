@@ -2,10 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { TipoCliente } from "../Models/TipoCliente";
+import { ClienteService } from "../Services/ClienteService";
+import { TipoClienteService } from "../Services/TipoClienteService";
 
 export const TipoClienteSelect = (props: any) => {
 
     const [tiposCliente, setTiposCliente] = useState<TipoCliente[]>([])
+    const tipoClienteService = new TipoClienteService();
 
     useEffect(() => {
         obterTiposCliente()
@@ -13,7 +16,7 @@ export const TipoClienteSelect = (props: any) => {
     }, [props.loading])
 
     const obterTiposCliente = () => {
-        axios.get('https://localhost:7299/TipoCliente')
+        tipoClienteService.obterTodos()
             .then((response: any) => {
                 setTiposCliente(response.data)
             });
