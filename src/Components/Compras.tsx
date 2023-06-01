@@ -2,17 +2,23 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Accordion, Table } from "react-bootstrap";
 import { Cliente } from "../Models/Cliente";
+import { ClienteService } from "../Services/ClienteService";
 
 export const Compras = () => {
     const [clientes, setClientes] = useState<any>([]);
+    const clienteService = new ClienteService();
 
     useEffect(() => {
-        axios.get('https://localhost:7299/Cliente/ComCompras')
+        obterTodosComDivida();
+
+    }, [])
+
+    const obterTodosComDivida = () => {
+        clienteService.obterTodosComDividas()
             .then(response => {
                 setClientes(response.data)
             })
-
-    }, [])
+    }
 
     {/* <h5>Dividas em aberto referente ao mes de Junho do ano 2022</h5> */ }
     return <Accordion>

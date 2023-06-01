@@ -5,11 +5,14 @@ import { ClienteLista } from "./ClienteLista";
 import { Button, Form, Modal } from "react-bootstrap";
 import { TipoCliente } from '../Models/TipoCliente';
 import { TipoClienteSelect } from './TipoClienteSelect';
+import { ClienteService } from '../Services/ClienteService';
 
 export const ClienteCadastro = () => {
   const [cliente, setCliente] = useState<Cliente>({} as Cliente);
   const [loading, setLoading] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
+
+  const clienteService = new ClienteService();
 
   const save = () => {
     if (isUpdate) {
@@ -21,7 +24,7 @@ export const ClienteCadastro = () => {
 
   const create = () => {
     setLoading(true)
-    axios.post('https://localhost:7299/Cliente', cliente)
+    clienteService.criar(cliente)
       .then(() => {
         setLoading(false);
         resetForm();
@@ -30,7 +33,7 @@ export const ClienteCadastro = () => {
 
   const update = () => {
     setLoading(true)
-    axios.put('https://localhost:7299/Cliente', cliente)
+    clienteService.editar(cliente)
       .then(() => {
         setIsUpdate(false)
         setLoading(false);
@@ -73,11 +76,6 @@ export const ClienteCadastro = () => {
     }
   }
 
-  const showDeleteConfirmationModal = () => {
-    return <Modal>
-      <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-    </Modal>
-  }
 
   return <>
     <div className="form-group col-12">

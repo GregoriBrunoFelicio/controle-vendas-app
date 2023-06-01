@@ -8,36 +8,59 @@ import React from "react";
 export const ClienteLista = (props: any) => {
 
     const [clientes, setClientes] = useState<any>([]);
-    const clienteService = new ClienteService();
-    const [show, setShow] = useState(false);
+    const [mostrarModal, setMostrarModal] = useState(false);
     const [cliente, setCliente] = useState<Cliente>({} as Cliente)
 
-    const handleClose = () => setShow(false);
+    const clienteService = new ClienteService();
+
+    const fecharModal = () => setMostrarModal(false);
     const handleShow = (cliente: Cliente) => {
         setCliente(cliente)
-        setShow(true)
+        setMostrarModal(true)
     };
 
     useEffect(() => {
-        getAll()
+        obterTodos()
     }, [props.loading])
 
-    const getAll = () => clienteService.getAll()
-        .then(response => {
+    const obterTodos = () => clienteService.obterTodos()
+        .then((response: any) => {
             setClientes(response.data)
         })
 
+
+    const inativarCliente = (clienteId: number) => clienteService.inativar(clienteId)
+        .then(() => {
+            fecharModal()
+            obterTodos()
+        })
+
+    const mensagemDeExclusao = () => {
+        if (cliente.totalDivida > 0) {
+            return <p>
+                O cliente {cliente.nome} {cliente.sobrenome} possui uma dívida aberta no valor de R$ {cliente.totalDivida}. Feche a divida para fazer a exclusão do mesmo.
+            </p>
+        }
+        else {
+            return <p>
+                Confirmar exclusão do cliente {cliente.nome} {cliente.sobrenome} ?
+            </p>
+        }
+    }
+
     const showDeleteConfirmationModal = () => {
-        return <Modal show={show} onHide={handleClose}>
+        return <Modal show={mostrarModal} onHide={fecharModal}>
             <Modal.Header closeButton>
                 <Modal.Title>Atenção!</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Confirmar exclusão do cliente {cliente.nome} que possui uma divida aberta de R$ {cliente.totalDivida}</Modal.Body>
+            <Modal.Body>
+                {mensagemDeExclusao()}
+            </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={() => fecharModal()}>
                     Cancelar
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={() => inativarCliente(cliente.id)}>
                     Excluir
                 </Button>
             </Modal.Footer>
