@@ -10,11 +10,9 @@ export const ClienteLista = (props: any) => {
     const [clientes, setClientes] = useState<any>([]);
     const [mostrarModal, setMostrarModal] = useState(false);
     const [cliente, setCliente] = useState<Cliente>({} as Cliente)
-
     const clienteService = new ClienteService();
 
-    const fecharModal = () => setMostrarModal(false);
-    const handleShow = (cliente: Cliente) => {
+    const mostrarModalExclusao = (cliente: Cliente) => {
         setCliente(cliente)
         setMostrarModal(true)
     };
@@ -31,7 +29,7 @@ export const ClienteLista = (props: any) => {
 
     const inativarCliente = (clienteId: number) => clienteService.inativar(clienteId)
         .then(() => {
-            fecharModal()
+            setMostrarModal(false)
             obterTodos()
         })
 
@@ -49,7 +47,7 @@ export const ClienteLista = (props: any) => {
     }
 
     const showDeleteConfirmationModal = () => {
-        return <Modal show={mostrarModal} onHide={fecharModal}>
+        return <Modal show={mostrarModal} onHide={() => setMostrarModal(false)}>
             <Modal.Header closeButton>
                 <Modal.Title>Atenção!</Modal.Title>
             </Modal.Header>
@@ -57,7 +55,7 @@ export const ClienteLista = (props: any) => {
                 {mensagemDeExclusao()}
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={() => fecharModal()}>
+                <Button variant="secondary" onClick={() => setMostrarModal(false)}>
                     Cancelar
                 </Button>
                 <Button variant="primary" onClick={() => inativarCliente(cliente.id)}>
@@ -75,8 +73,8 @@ export const ClienteLista = (props: any) => {
                         {cliente.nome} {cliente.sobrenome} - {cliente.tipoCliente.nome}
                     </div>
                     <div className="col-2">
-                        <Button className="m-1" variant="primary" onClick={() => props.fillForm(cliente)}>Editar</Button>
-                        <Button className="m-1" variant="danger" onClick={() => handleShow(cliente)} >Excluir</Button>
+                        <Button className="m-1" variant="primary" onClick={() => props.preecherFormulario(cliente)}>Editar</Button>
+                        <Button className="m-1" variant="danger" onClick={() => mostrarModalExclusao(cliente)} >Excluir</Button>
                     </div>
                 </div>
             </ListGroupItem>

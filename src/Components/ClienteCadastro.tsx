@@ -10,34 +10,33 @@ import { ClienteService } from '../Services/ClienteService';
 export const ClienteCadastro = () => {
   const [cliente, setCliente] = useState<Cliente>({} as Cliente);
   const [loading, setLoading] = useState(false);
-  const [isUpdate, setIsUpdate] = useState(false);
-
+  const [editando, setEditando] = useState(false);
   const clienteService = new ClienteService();
 
-  const save = () => {
-    if (isUpdate) {
-      update()
+  const salvar = () => {
+    if (editando) {
+      editar()
     } else {
-      create()
+      criar()
     }
   }
 
-  const create = () => {
+  const criar = () => {
     setLoading(true)
     clienteService.criar(cliente)
       .then(() => {
         setLoading(false);
-        resetForm();
+        limparFormulario();
       }).catch(() => setLoading(false))
   }
 
-  const update = () => {
+  const editar = () => {
     setLoading(true)
     clienteService.editar(cliente)
       .then(() => {
-        setIsUpdate(false)
+        setEditando(false)
         setLoading(false);
-        resetForm();
+        limparFormulario();
       }).catch(() => setLoading(false))
   }
 
@@ -45,7 +44,7 @@ export const ClienteCadastro = () => {
     setCliente({ ...cliente, [event.target.name]: event.target.value });
   }
 
-  const resetForm = () => setCliente({
+  const limparFormulario = () => setCliente({
     id: 0,
     nome: '',
     sobrenome: '',
@@ -59,12 +58,12 @@ export const ClienteCadastro = () => {
     setCliente({ ...cliente, tipoClienteId: tipoClienteId })
   }
 
-  const fillForm = (cliente: Cliente) => {
-    setIsUpdate(true)
+  const preecherFormulario = (cliente: Cliente) => {
+    setEditando(true)
     setCliente(cliente)
   }
 
-  const isFormValid = () => {
+  const validarFormulario = () => {
     if (cliente?.tipoClienteId === 0) {
       return false;
     }
@@ -90,10 +89,10 @@ export const ClienteCadastro = () => {
           <TipoClienteSelect setTipoCliente={setTipoCliente} loading={loading} />
         </Form.Group>
         <Form.Group className='col-3 m-2'>
-          <Button size="lg" onClick={save} disabled={loading || !isFormValid()}>Salvar</Button>
+          <Button size="lg" onClick={salvar} disabled={loading || !validarFormulario()}>Salvar</Button>
         </Form.Group>
-        <ClienteLista loading={loading} fillForm={fillForm} />
       </Form>
+      <ClienteLista loading={loading} preecherFormulario={preecherFormulario} />
     </div >
   </>
 }
