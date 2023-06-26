@@ -62,7 +62,7 @@ export const ClienteCadastro = () => {
     tipoClienteId: 0,
     compras: [],
     totalDivida: 0,
-    tipoCliente: {} as TipoCliente
+    tipoCliente: { id: 0, nome: ' ' } as TipoCliente
   });
 
   const setTipoCliente = (tipoClienteId: number) => {
