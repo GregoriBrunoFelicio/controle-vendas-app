@@ -6,7 +6,7 @@ import { TipoClienteSelect } from './TipoClienteSelect';
 import { ClienteService } from '../Services/ClienteService';
 import { ToastContainer } from 'react-toastify';
 import { ToastService } from './Shared/ToastService';
-import { TipoCliente } from "../Models/TipoCliente";
+import { TipoCliente } from "./TipoCliente";
 
 export const ClienteCadastro = () => {
   const [cliente, setCliente] = useState<Cliente>({} as Cliente);
