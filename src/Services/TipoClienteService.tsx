@@ -1,5 +1,5 @@
 import axios from "axios"
-import { TipoCliente } from "../Components/TipoCliente"
+import { TipoCliente } from "../Models/TipoCliente"
 
 export class TipoClienteService {
     readonly URL = `${process.env.REACT_APP_API_URL}/tipoCliente`

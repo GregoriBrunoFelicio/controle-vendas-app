@@ -1,5 +1,5 @@
 import { Compra } from "./Compra";
-import { TipoCliente } from "../Components/TipoCliente";
+import { TipoCliente } from "./TipoCliente";
 
 export interface Cliente {
     id: number;
