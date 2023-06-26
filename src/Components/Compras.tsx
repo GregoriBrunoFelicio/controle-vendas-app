@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { Accordion, Table } from "react-bootstrap";
 import { Cliente } from "../Models/Cliente";
@@ -20,7 +19,6 @@ export const Compras = () => {
             })
     }
 
-    {/* <h5>Dividas em aberto referente ao mes de Junho do ano 2022</h5> */ }
     return <Accordion>
         {
             clientes?.map((cliente: Cliente, index: number) => <Accordion.Item eventKey={cliente.id.toString()}>

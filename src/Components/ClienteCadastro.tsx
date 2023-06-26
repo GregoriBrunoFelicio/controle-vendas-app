@@ -1,12 +1,11 @@
-import axios from 'axios';
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Cliente } from "../Models/Cliente";
 import { ClienteLista } from "./ClienteLista";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { TipoCliente } from '../Models/TipoCliente';
 import { TipoClienteSelect } from './TipoClienteSelect';
 import { ClienteService } from '../Services/ClienteService';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { ToastService } from './Shared/ToastService';
 
 export const ClienteCadastro = () => {

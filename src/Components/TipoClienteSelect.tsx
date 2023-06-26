@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
-import { TipoCliente } from "../Models/TipoCliente";
 import { TipoClienteService } from "../Services/TipoClienteService";
+import { TipoCliente } from "../Models/TipoCliente";
 
 export const TipoClienteSelect = (props: any) => {
 

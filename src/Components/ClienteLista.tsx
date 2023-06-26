@@ -1,9 +1,7 @@
-import axios from "axios"
 import { useEffect, useState } from "react";
 import { Button, ListGroup, ListGroupItem, Modal } from "react-bootstrap";
 import { Cliente } from "../Models/Cliente";
 import { ClienteService } from "../Services/ClienteService";
-import React from "react";
 
 export const ClienteLista = (props: any) => {
 
