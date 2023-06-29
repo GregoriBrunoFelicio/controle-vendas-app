@@ -56,7 +56,7 @@ export const ClienteLista = (props: any) => {
                 <Button variant="secondary" onClick={() => setMostrarModal(false)}>
                     Cancelar
                 </Button>
-                <Button variant="primary" onClick={() => inativarCliente(cliente.id)}>
+                <Button disabled={cliente.totalDivida > 0} variant="primary" onClick={() => inativarCliente(cliente.id)}>
                     Excluir
                 </Button>
             </Modal.Footer>
